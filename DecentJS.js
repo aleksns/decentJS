@@ -17,7 +17,7 @@ import React, { useEffect, useState } from "react";
 const url = "https://my-json-server.typicode.com/savayer/demo/posts";
 
 export default function DecentJS() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -72,7 +72,15 @@ export default function DecentJS() {
 
   return (
     <div className="posts">
-      {posts && posts.map((post) => <Card key={post.id} post={post} />)}
+      {posts ? (
+        <>
+          {posts.map((post) => (
+            <Card key={post.id} post={post} />
+          ))}
+        </>
+      ) : (
+        <h3>Loading...</h3>
+      )}
     </div>
   );
 }
